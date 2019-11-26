@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" href="css/bootstrap-cdn.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        
+        <title>Assignment 1 Cross-Platform</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>To do List</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+        </div>
+        <ul id="toDoList">
+
+        </ul>
+        
+
+
+        <!--Add Button-->
+
+        <button type="button" class="btn btn-default btn-sm" id="btnToDoList">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+          </button>
+
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script src="js/jquery-1.12.4.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+</html>
