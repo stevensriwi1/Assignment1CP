@@ -119,6 +119,10 @@ h1 {
     width: 100%;
     
 }
+#toDoList span
+{
+    cursor: default;
+}
 .checked
 {
     text-decoration: line-through;

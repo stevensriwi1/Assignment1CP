@@ -1,60 +1,85 @@
 
-function updateListItem()
-{
+function updateListItem() {
     //getting hold of the checkbox id and replacing to just the number and assign the item variable to the id to get hold of the span item id.
-    var checkBoxId= this.id.replace("checkBox_","");
-    var itemText=document.getElementById("item_"+checkBoxId);
+    var checkBoxId = this.id.replace("checkBox_", "");
+    var itemText = document.getElementById("item_" + checkBoxId);
     //if the checkbox is checked then do this
-    if(this.checked)
-    {
-        itemText.className="checked";
+    if (this.checked) {
+        itemText.className = "checked";
     }
-    else
-    {
-        itemText.className="unchecked";
+    else {
+        itemText.className = "unchecked";
     }
 }
-function renameItem()
-{
+function renameItem() {
+    var newItemText = prompt("What should the new item be renamed?");
 
+    if (!newItemText || newItemText == "" || newItemText == " ") {
+        return false;
+    }
+
+    this.innerText = newItemText;
 }
+function deleteItem() {
+
+    var clickedItemId = this.id.replace("btn_", "");
+    //if checkbox is checked then proceed, otherwise return false
+    if (document.getElementById("checkBox_" + clickedItemId).checked) {
+        document.getElementById("li_" + clickedItemId).style.display = "none";
+    }
+    else {
+        return false;
+    }
+}
+
 function addNewItem(list, itemText) {
 
     //assign unique number to the id's through time
     var date = new Date();
-    var id= "" + date.getHours() + date.getMinutes() + date.getSeconds + date.getMilliseconds();
+    var id = "" + date.getHours() + date.getMinutes() + date.getSeconds + date.getMilliseconds();
 
     //adding an element of li(HTML tag)
     var listItem = document.createElement("li");
-    listItem.style.cssText='border:1px solid #ccc; background: #eee; padding: 5px 10px; width:100%; color: #000;';
-    
+    listItem.id = "li_" + id;
+
+    listItem.style.cssText = 'border:1px solid #ccc; background: #eee; padding: 5px 10px; width:100%; color: #000;';
+
 
     //assigning a checkbox
     var checkBox = document.createElement("input");
-    checkBox.type="checkbox";
-    checkBox.id="checkBox_"+ id;
+    checkBox.type = "checkbox";
+    checkBox.id = "checkBox_" + id;
 
     //if checkbox is clicked then use this function
     checkBox.onclick = updateListItem;
 
     //assigning the assigned task to the span
     var span = document.createElement("span");
-    span.innerText=itemText;
-    span.style.cssText='padding-left:10px'
-    span.id="item_"+ id;
-    span.onclick=renameItem;
+    span.innerText = itemText;
+    span.style.cssText = 'padding-left:10px'
+    span.id = "item_" + id;
+    //rename
+    span.onclick = renameItem;
+    
+    //delete
+    var deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.innerText = "Delete";
+    deleteButton.style.cssFloat = 'right';
+    deleteButton.id = "btn_" + id;
+    deleteButton.onclick = deleteItem;
 
     //append these elements to listItem
     listItem.appendChild(checkBox);
     listItem.appendChild(span);
-
+    listItem.appendChild(deleteButton);
     //append list item to the UpperList
     list.appendChild(listItem);
-    
+
 
 }
 
-var totalItem=0;
+var totalItem = 0;
 var btnEnter = document.getElementById("btnEnter");
 var insertItemText = document.getElementById("insertItemText");
 insertItemText.onkeyup = function (event) {
@@ -79,7 +104,7 @@ insertItemText.onkeyup = function (event) {
         insertItemText.setAttribute("type", "hidden");
         btnEnter.style.display = "none";
     }
-    
+
 }
 
 
