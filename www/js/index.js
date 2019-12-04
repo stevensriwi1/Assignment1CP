@@ -1,3 +1,26 @@
+var storage = window.localStorage;
+var keyId=0;
+var UlTest = document.getElementById("testUL");
+
+var i;
+for (i = 0; i < storage.length; i++) {
+    var LiTest=document.createElement("li");
+    LiTest.innerText=storage.getItem(i);
+    UlTest.appendChild(LiTest);
+}
+/* 
+function addNewItemTest(UlTest,itemText)
+{
+    var LiTest=document.createElement("li");
+
+    LiTest.innerText=storage.getItem(keyId);
+
+
+    UlTest.appendChild(LiTest);
+
+}
+*/
+
 
 function updateListItem() {
     //getting hold of the checkbox id and replacing to just the number and assign the item variable to the id to get hold of the span item id.
@@ -53,6 +76,8 @@ function addNewItem(list, itemText) {
     //if checkbox is clicked then use this function
     checkBox.onclick = updateListItem;
 
+
+
     //assigning the assigned task to the span
     var span = document.createElement("span");
     span.innerText = itemText;
@@ -60,7 +85,7 @@ function addNewItem(list, itemText) {
     span.id = "item_" + id;
     //rename
     span.onclick = renameItem;
-    
+
     //delete
     var deleteButton = document.createElement("button");
     deleteButton.type = "button";
@@ -79,10 +104,13 @@ function addNewItem(list, itemText) {
 
 }
 
-var totalItem = 0;
 var btnEnter = document.getElementById("btnEnter");
 var insertItemText = document.getElementById("insertItemText");
 insertItemText.onkeyup = function (event) {
+
+
+
+
     //proceed when enter button is pushed.
     if (event.keyCode === 13) {
         // Cancel the default action, if needed
@@ -93,16 +121,25 @@ insertItemText.onkeyup = function (event) {
 
     btnEnter.onclick = function () {
         var itemText = insertItemText.value;
+        storage.setItem(keyId, itemText); // Pass a key name and its value to add or update that key.
+        var itemTextValue = storage.getItem(keyId); // Pass a key name to get its value
+
+
+
 
         if (!itemText || itemText == "" || itemText == " ") {
             return false;
         }
-        //call function to add the value you want to list
-        addNewItem(document.getElementById("toDoList"), itemText);
-        //make input hidden
 
+
+
+        //call function to add the value you want to list
+        addNewItem(document.getElementById("toDoList"), itemTextValue);
+        //make input hidden
         insertItemText.setAttribute("type", "hidden");
         btnEnter.style.display = "none";
+
+        keyId++;
     }
 
 }
@@ -122,31 +159,3 @@ btnNewList.onclick = function () {
 
 
 
-var app = {
-    // Application Constructor
-    initialize: function () {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    },
-
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    onDeviceReady: function () {
-        this.receivedEvent('deviceready');
-    },
-
-    // Update DOM on a Received Event
-    receivedEvent: function (id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
-};
-
-app.initialize();
