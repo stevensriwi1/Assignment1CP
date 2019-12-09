@@ -7,7 +7,8 @@ var imgBackground;
 var UlList = document.getElementById("toDoList");
 document.body.style.backgroundImage.src = storage.getItem(dateId);
 for (var i = 0; i < storage.length; i++) {
-    var id = i;
+    //collect the keys first
+    var key = storage.key(i);
     //adding an element of li(HTML tag)
     var listItem = document.createElement("li");
     listItem.id = "li_" + id;
@@ -16,16 +17,16 @@ for (var i = 0; i < storage.length; i++) {
     //assigning a checkbox
     var checkBox = document.createElement("input");
     checkBox.type = "checkbox";
-    checkBox.id = "checkBox_" + id;
+    checkBox.id = "checkBox_" + key;
 
     //if checkbox is clicked then use this function
     checkBox.onclick = updateListItem;
 
     //assigning the assigned task to the span
     var span = document.createElement("span");
-    span.innerText = storage.getItem(id);
+    span.innerText = storage.getItem(key);
     span.style.cssText = 'padding-left:10px'
-    span.id = "item_" + id;
+    span.id = "item_" + key;
     //rename
     span.onclick = renameItem;
 
@@ -34,7 +35,7 @@ for (var i = 0; i < storage.length; i++) {
     deleteButton.type = "button";
     deleteButton.innerText = "Delete";
     deleteButton.style.cssFloat = 'right';
-    deleteButton.id = "btn_" + id;
+    deleteButton.id = "btn_" + key;
     deleteButton.onclick = deleteItem;
 
 
@@ -193,7 +194,7 @@ let app = {
         imgBackground.src = storage.getItem(dateId);
         document.body.style.backgroundImage = storage.getItem(dateId);*/
 
-        //document.getElementById('msg').textContent = imgURI;
+        document.getElementById('msg').textContent = "The Location is" + imgURI;
         document.getElementById('photo').src = imgURI;
         document.body.style.backgroundImage.src = imgURI;
 
