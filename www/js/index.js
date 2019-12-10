@@ -11,7 +11,7 @@ for (var i = 0; i < storage.length; i++) {
     var key = storage.key(i);
     //adding an element of li(HTML tag)
     var listItem = document.createElement("li");
-    listItem.id = "li_" + id;
+    listItem.id = "li_" + key;
     listItem.style.cssText = 'border:1px solid #ccc; background: #eee; padding: 5px 10px; width:100%; color: #000;';
 
     //assigning a checkbox
@@ -194,7 +194,7 @@ let app = {
         imgBackground.src = storage.getItem(dateId);
         document.body.style.backgroundImage = storage.getItem(dateId);*/
 
-        document.getElementById('msg').textContent = "The Location is" + imgURI;
+        document.getElementById('msg').textContent = "The Location is " + imgURI;
         document.getElementById('photo').src = imgURI;
         document.body.style.backgroundImage.src = imgURI;
 
@@ -203,18 +203,16 @@ let app = {
         document.getElementById('msg').textContent = msg;
     },
     paused: function (event) {
-        console.dir(event);
         alert("You are pausing the app");
     },
     resumed: function (event) {
-        console.dir(event);
         alert("Welcome Back");
     }
 };
 //calling on an event that detects whether all your plugins are ready
-document.addEventListener('deviceready', app.init);
-document.addEventListener('pause', app.paused);
-document.addEventListener('resume', app.resumed);
+document.addEventListener('deviceready', app.init, false);
+//document.addEventListener('pause', app.paused,false);
+document.addEventListener('resume', app.resumed, false);
 
 
 
