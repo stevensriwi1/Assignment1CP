@@ -1,7 +1,6 @@
 var storage = window.localStorage;
-var keyId=0;
+var keyId=localStorage.length;
 var UlTest = document.getElementById("testUL");
-
 var i;
 for (i = 0; i < storage.length; i++) {
     var LiTest=document.createElement("li");
@@ -107,9 +106,6 @@ function addNewItem(list, itemText) {
 var btnEnter = document.getElementById("btnEnter");
 var insertItemText = document.getElementById("insertItemText");
 insertItemText.onkeyup = function (event) {
-
-
-
 
     //proceed when enter button is pushed.
     if (event.keyCode === 13) {

@@ -12,6 +12,12 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
+<<<<<<< HEAD
+=======
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+>>>>>>> 780e67485535d24938c6396bc3a482915dd86748
     }
   },
   "dependent_plugins": {}

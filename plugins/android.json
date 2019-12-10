@@ -7,10 +7,21 @@
     "files": {}
   },
   "installed_plugins": {
+<<<<<<< HEAD
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-device": {
+=======
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+>>>>>>> 780e67485535d24938c6396bc3a482915dd86748
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
