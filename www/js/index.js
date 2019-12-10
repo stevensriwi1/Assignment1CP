@@ -1,25 +1,51 @@
 var storage = window.localStorage;
-var keyId=localStorage.length;
-var UlTest = document.getElementById("testUL");
-var i;
-for (i = 0; i < storage.length; i++) {
-    var LiTest=document.createElement("li");
-    LiTest.innerText=storage.getItem(i);
-    UlTest.appendChild(LiTest);
+var keyId = localStorage.length;
+//assign unique number to the id's through time
+var date = new Date();
+var dateId;
+var imgBackground;
+var UlList = document.getElementById("toDoList");
+document.body.style.backgroundImage.src = storage.getItem(dateId);
+for (var i = 0; i < storage.length; i++) {
+    //collect the keys first
+    var key = storage.key(i);
+    //adding an element of li(HTML tag)
+    var listItem = document.createElement("li");
+    listItem.id = "li_" + id;
+    listItem.style.cssText = 'border:1px solid #ccc; background: #eee; padding: 5px 10px; width:100%; color: #000;';
+
+    //assigning a checkbox
+    var checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.id = "checkBox_" + key;
+
+    //if checkbox is clicked then use this function
+    checkBox.onclick = updateListItem;
+
+    //assigning the assigned task to the span
+    var span = document.createElement("span");
+    span.innerText = storage.getItem(key);
+    span.style.cssText = 'padding-left:10px'
+    span.id = "item_" + key;
+    //rename
+    span.onclick = renameItem;
+
+    //delete
+    var deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.innerText = "Delete";
+    deleteButton.style.cssFloat = 'right';
+    deleteButton.id = "btn_" + key;
+    deleteButton.onclick = deleteItem;
+
+
+    //append these elements to listItem
+    listItem.appendChild(checkBox);
+    listItem.appendChild(span);
+    listItem.appendChild(deleteButton);
+    //append list item to the UpperList
+    UlList.appendChild(listItem);
 }
-/* 
-function addNewItemTest(UlTest,itemText)
-{
-    var LiTest=document.createElement("li");
-
-    LiTest.innerText=storage.getItem(keyId);
-
-
-    UlTest.appendChild(LiTest);
-
-}
-*/
-
 
 function updateListItem() {
     //getting hold of the checkbox id and replacing to just the number and assign the item variable to the id to get hold of the span item id.
@@ -41,13 +67,18 @@ function renameItem() {
     }
 
     this.innerText = newItemText;
+
+    var clickedSpanId = this.id.replace("item_", "");
+    storage.setItem(clickedSpanId, newItemText);
 }
 function deleteItem() {
 
     var clickedItemId = this.id.replace("btn_", "");
     //if checkbox is checked then proceed, otherwise return false
     if (document.getElementById("checkBox_" + clickedItemId).checked) {
-        document.getElementById("li_" + clickedItemId).style.display = "none";
+        var deletingItem = document.getElementById("li_" + clickedItemId);
+        deletingItem.parentNode.removeChild(deletingItem);
+        storage.removeItem(clickedItemId);
     }
     else {
         return false;
@@ -56,32 +87,25 @@ function deleteItem() {
 
 function addNewItem(list, itemText) {
 
-    //assign unique number to the id's through time
-    var date = new Date();
-    var id = "" + date.getHours() + date.getMinutes() + date.getSeconds + date.getMilliseconds();
-
     //adding an element of li(HTML tag)
     var listItem = document.createElement("li");
-    listItem.id = "li_" + id;
-
+    listItem.id = "li_" + keyId;
     listItem.style.cssText = 'border:1px solid #ccc; background: #eee; padding: 5px 10px; width:100%; color: #000;';
 
 
     //assigning a checkbox
     var checkBox = document.createElement("input");
     checkBox.type = "checkbox";
-    checkBox.id = "checkBox_" + id;
+    checkBox.id = "checkBox_" + keyId;
 
     //if checkbox is clicked then use this function
     checkBox.onclick = updateListItem;
-
-
 
     //assigning the assigned task to the span
     var span = document.createElement("span");
     span.innerText = itemText;
     span.style.cssText = 'padding-left:10px'
-    span.id = "item_" + id;
+    span.id = "item_" + keyId;
     //rename
     span.onclick = renameItem;
 
@@ -90,8 +114,9 @@ function addNewItem(list, itemText) {
     deleteButton.type = "button";
     deleteButton.innerText = "Delete";
     deleteButton.style.cssFloat = 'right';
-    deleteButton.id = "btn_" + id;
+    deleteButton.id = "btn_" + keyId;
     deleteButton.onclick = deleteItem;
+
 
     //append these elements to listItem
     listItem.appendChild(checkBox);
@@ -119,18 +144,11 @@ insertItemText.onkeyup = function (event) {
         var itemText = insertItemText.value;
         storage.setItem(keyId, itemText); // Pass a key name and its value to add or update that key.
         var itemTextValue = storage.getItem(keyId); // Pass a key name to get its value
-
-
-
-
         if (!itemText || itemText == "" || itemText == " ") {
             return false;
         }
-
-
-
         //call function to add the value you want to list
-        addNewItem(document.getElementById("toDoList"), itemTextValue);
+        addNewItem(UlList, itemTextValue);
         //make input hidden
         insertItemText.setAttribute("type", "hidden");
         btnEnter.style.display = "none";
@@ -139,17 +157,65 @@ insertItemText.onkeyup = function (event) {
     }
 
 }
-
-
-
+//making a new list of items
 var btnNewList = document.getElementById("btnToDoList");
-
 btnNewList.onclick = function () {
     //setting the input to be visible
     insertItemText.setAttribute("type", "text");
     btnEnter.style.display = "block";
     insertItemText.select();
 }
+
+let app = {
+    init: function () {
+        document.getElementById('btnBackground').addEventListener('click', app.takephoto);
+    },
+
+    takephoto: function () {
+        let options = {
+            quality: 90,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            mediaType: Camera.MediaType.PICTURE,
+            encodingType: Camera.EncodingType.JPEG,
+            cameraDirection: Camera.Direction.BACK,
+            targetWidth: 300,
+            targetHeight: 400
+        };
+        dateId = "" + date.getHours() + date.getMinutes() + date.getSeconds + date.getMilliseconds();
+        navigator.camera.getPicture(app.success, app.failure, options);
+    },
+    success: function (imgURI) {
+
+        //setting a unique id to the image on local storage
+
+        /*storage.setItem(dateId,imgURI);
+        document.getElementById('msg').textContent = storage.getItem(dateId);        
+        imgBackground.src = storage.getItem(dateId);
+        document.body.style.backgroundImage = storage.getItem(dateId);*/
+
+        document.getElementById('msg').textContent = "The Location is" + imgURI;
+        document.getElementById('photo').src = imgURI;
+        document.body.style.backgroundImage.src = imgURI;
+
+    },
+    failure: function (msg) {
+        document.getElementById('msg').textContent = msg;
+    },
+    paused: function (event) {
+        console.dir(event);
+        alert("You are pausing the app");
+    },
+    resumed: function (event) {
+        console.dir(event);
+        alert("Welcome Back");
+    }
+};
+//calling on an event that detects whether all your plugins are ready
+document.addEventListener('deviceready', app.init);
+document.addEventListener('pause', app.paused);
+document.addEventListener('resume', app.resumed);
+
 
 
 
