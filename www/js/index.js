@@ -1,19 +1,49 @@
 
-function addNewItem()
+function addNewItem(list, itemText)
 {
     //adding an element of li(HTML tag)
     var listItem = document.createElement("li");
-    listItem.innerText="Helllllllllo";
+    listItem.innerText=itemText;
 
 
-    var list= document.getElementById("toDoList");
     list.appendChild(listItem);
+}
+var btnEnter=document.getElementById("btnEnter");
+var insertItemText = document.getElementById("insertItemText");
+insertItemText.onkeyup = function(event)
+{
+    //proceed when enter button is pushed.
+    btnEnter.onclick= function()
+    { 
+        var itemText = insertItemText.value;
+
+        if(!itemText|| itemText==""|| itemText== " ")
+        {
+            return false;
+        }
+        //call function to add the value you want to list
+        addNewItem(document.getElementById("toDoList"), itemText);
+        //make input hidden
+        
+        insertItemText.setAttribute("type","hidden");
+        btnEnter.style.display="none";
+    }
+
 }
 
 
+
+
 var btnNewList = document.getElementById("btnToDoList");
-// if you use brackets, then it will just call the function straight away.
-btnNewList.onclick = addNewItem;
+
+btnNewList.onclick = function(){
+    //setting the input to be visible
+    insertItemText.setAttribute("type","text");
+    btnEnter.style.display="block";
+    insertItemText.select();
+}
+
+
 
 
 
