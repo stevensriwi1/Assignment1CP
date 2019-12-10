@@ -116,6 +116,7 @@ function addNewItem(list, itemText) {
     deleteButton.innerText = "Delete";
     deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.style.cssFloat = 'right';
+    deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.id = "btn_" + keyId;
     deleteButton.onclick = deleteItem;
 

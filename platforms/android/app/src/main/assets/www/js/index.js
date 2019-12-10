@@ -34,7 +34,7 @@ for (var i = 0; i < storage.length; i++) {
     var deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.innerText = "Delete";
-    deleteButton.className= "glyphicon glyphicon-plus";
+    deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.style.cssFloat = 'right';
     deleteButton.id = "btn_" + key;
     deleteButton.onclick = deleteItem;
@@ -114,8 +114,9 @@ function addNewItem(list, itemText) {
     var deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.innerText = "Delete";
-    deleteButton.className= "glyphicon glyphicon-plus";
+    deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.style.cssFloat = 'right';
+    deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.id = "btn_" + keyId;
     deleteButton.onclick = deleteItem;
 
