@@ -16,14 +16,7 @@
     "bootstrap": "^3.4.1",
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     "cordova-plugin-camera": "^4.1.0",
->>>>>>> 780e67485535d24938c6396bc3a482915dd86748
-=======
-    "cordova-plugin-camera": "^4.1.0",
->>>>>>> 652aea94021825e07cd67fd6431aa25bd2d2c50a
     "cordova-plugin-device": "^2.0.3",
     "web": "0.0.2"
   },
@@ -33,20 +26,10 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
-<<<<<<< HEAD
-<<<<<<< HEAD
-      "cordova-plugin-device": {}
-=======
-=======
->>>>>>> 652aea94021825e07cd67fd6431aa25bd2d2c50a
       "cordova-plugin-device": {},
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       }
-<<<<<<< HEAD
->>>>>>> 780e67485535d24938c6396bc3a482915dd86748
-=======
->>>>>>> 652aea94021825e07cd67fd6431aa25bd2d2c50a
     },
     "platforms": [
       "android",
