@@ -12,7 +12,7 @@ for (var i = 0; i < storage.length; i++) {
     //adding an element of li(HTML tag)
     var listItem = document.createElement("li");
     listItem.id = "li_" + key;
-    listItem.style.cssText = 'border:1px solid #ccc; background: #eee; padding: 5px 10px; width:100%; color: #000;';
+    listItem.style.cssText = 'border:1px solid #ccc; background: #eee; padding: 10px 10px; width:100%; color: #000;';
 
     //assigning a checkbox
     var checkBox = document.createElement("input");
@@ -36,6 +36,8 @@ for (var i = 0; i < storage.length; i++) {
     deleteButton.innerText = "Delete";
     deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.style.cssFloat = 'right';
+    deleteButton.style.padding='5px';
+    deleteButton.style.borderRadius='5px';
     deleteButton.id = "btn_" + key;
     deleteButton.onclick = deleteItem;
 
@@ -91,7 +93,7 @@ function addNewItem(list, itemText) {
     //adding an element of li(HTML tag)
     var listItem = document.createElement("li");
     listItem.id = "li_" + keyId;
-    listItem.style.cssText = 'border:1px solid #ccc; background: #eee; padding: 5px 10px; width:100%; color: #000;';
+    listItem.style.cssText = 'border:1px solid #ccc; background: #eee; padding: 10px 10px; width:100%; color: #000;';
 
 
     //assigning a checkbox
@@ -116,7 +118,8 @@ function addNewItem(list, itemText) {
     deleteButton.innerText = "Delete";
     deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.style.cssFloat = 'right';
-    deleteButton.className= "glyphicon glyphicon-remove";
+    deleteButton.style.padding='5px';
+    deleteButton.style.borderRadius='5px';
     deleteButton.id = "btn_" + keyId;
     deleteButton.onclick = deleteItem;
 
@@ -171,7 +174,7 @@ btnNewList.onclick = function () {
 
 let app = {
     init: function () {
-        document.getElementById('btnBackground').addEventListener('click', app.takephoto);
+        document.getElementById('btnImg').addEventListener('click', app.takephoto);
     },
 
     takephoto: function () {
@@ -197,7 +200,7 @@ let app = {
         imgBackground.src = storage.getItem(dateId);
         document.body.style.backgroundImage = storage.getItem(dateId);*/
 
-        document.getElementById('msg').textContent = "The Location is " + imgURI;
+        document.getElementById('msgImg').textContent = "The Location is " + imgURI;
         document.getElementById('photo').src = imgURI;
         document.body.style.backgroundImage.src = imgURI;
 
