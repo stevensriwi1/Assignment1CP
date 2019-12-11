@@ -33,7 +33,7 @@ for (var i = 0; i < storage.length; i++) {
     //delete
     var deleteButton = document.createElement("button");
     deleteButton.type = "button";
-    deleteButton.innerText = "Delete";
+    deleteButton.innerText = "Remove";
     deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.style.cssFloat = 'right';
     deleteButton.style.padding='5px';
@@ -84,6 +84,7 @@ function deleteItem() {
         storage.removeItem(clickedItemId);
     }
     else {
+        alert("Please mark it as done first, then you may remove it.");
         return false;
     }
 }
@@ -115,7 +116,7 @@ function addNewItem(list, itemText) {
     //delete
     var deleteButton = document.createElement("button");
     deleteButton.type = "button";
-    deleteButton.innerText = "Delete";
+    deleteButton.innerText = "Remove";
     deleteButton.className= "glyphicon glyphicon-remove";
     deleteButton.style.cssFloat = 'right';
     deleteButton.style.padding='5px';
@@ -200,9 +201,8 @@ let app = {
         imgBackground.src = storage.getItem(dateId);
         document.body.style.backgroundImage = storage.getItem(dateId);*/
 
-        document.getElementById('msgImg').textContent = "The Location is " + imgURI;
+        document.getElementById('msgImg').textContent = "Nice Picture!";
         document.getElementById('photo').src = imgURI;
-        document.body.style.backgroundImage.src = imgURI;
 
     },
     failure: function (msg) {
